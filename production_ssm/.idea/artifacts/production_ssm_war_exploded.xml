@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="production_ssm:war exploded">
+    <output-path>E:/IDEA-OUT/artifacts/production_ssm</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="production_ssm/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="production_ssm" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
