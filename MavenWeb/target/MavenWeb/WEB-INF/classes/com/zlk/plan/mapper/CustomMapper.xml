@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zlk.plan.mapper.CustomMapper">
+    <resultMap id="customMap" type="com.zlk.plan.entity.Custom">
+        <id property="cid" column="cid" javaType="java.lang.Integer"></id>
+        <result property="cname" column="cname" javaType="java.lang.String"></result>
+        <result property="crealname" column="crealname" javaType="java.lang.String"></result>
+        <result property="caddress" column="caddress" javaType="java.lang.String"></result>
+        <result property="cfax" column="cfax" javaType="java.lang.String"></result>
+        <result property="cemail" column="cemail" javaType="java.lang.String"></result>
+        <result property="cadmin" column="cadmin" javaType="java.lang.String"></result>
+        <result property="cphone" column="cphone" javaType="java.lang.String"></result>
+        <result property="cstate" column="cstate" javaType="java.lang.String"></result>
+        <result property="cps" column="cps" javaType="java.lang.String"></result>
+    </resultMap>
+
+    <!--查询所有客户信息-->
+    <select id="findAll" parameterType="com.zlk.plan.entity.Pagination" resultMap="customMap">
+        select * from custom limit #{startPage},#{limit}
+    </select>
+
+    <!--通过id查询-->
+    <select id="findCustomById" parameterType="java.lang.Integer" resultMap="customMap">
+        select * from custom where cid = #{cid}
+    </select>
+
+    <!--查询总条数-->
+    <select id="findCount" parameterType="com.zlk.plan.entity.Pagination" resultType="java.lang.Integer">
+        select count(1) from custom
+    </select>
+
+    <!--通过id删除客户-->
+    <delete id="deleteCustomById" parameterType="java.lang.Integer">
+        delete from custom where cid = #{cid}
+    </delete>
+
+    <!--添加客户-->
+    <insert id="insertCustomById" parameterType="com.zlk.plan.entity.Custom">
+        insert into custom(cname,crealname,caddress,cfax,cemail,cadmin,cphone,cstate,cps)
+        values (#{cname},#{crealname},#{caddress},#{cfax},
+                #{cemail},#{cadmin},#{cphone},#{cstate},#{cps})
+    </insert>
+
+    <!--通过id修改-->
+    <update id="updateCustomById" parameterType="com.zlk.plan.entity.Custom">
+        update custom set cname = #{cname},crealname = #{crealname},caddress=#{caddress},cfax=#{cfax},
+                cemail=#{cemail},cadmin=#{cadmin},cphone=#{cphone},cstate=#{cstate},cps=#{cps}
+                where cid = #{cid}
+    </update>
+
+
+</mapper>

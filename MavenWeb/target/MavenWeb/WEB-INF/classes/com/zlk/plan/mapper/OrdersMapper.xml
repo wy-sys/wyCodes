@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zlk.plan.mapper.OrdersMapper">
+    <resultMap id="ordersMap" type="com.zlk.plan.entity.Orders">
+        <id property="oid" column="oid" javaType="java.lang.Integer"></id>
+        <result property="oCname" column="o_cname" javaType="java.lang.String"></result>
+        <result property="oPname" column="o_pname" javaType="java.lang.String"></result>
+        <result property="onum" column="onum" javaType="java.lang.Integer"></result>
+        <result property="oprice" column="oprice" javaType="java.lang.Double"></result>
+        <result property="ounit" column="ounit" javaType="java.lang.String"></result>
+        <result property="ostate" column="ostate" javaType="java.lang.String"></result>
+        <result property="ocreatetime" column="ocreatetime" javaType="java.util.Date"></result>
+        <result property="ofinishtime" column="ofinishtime" javaType="java.util.Date"></result>
+        <result property="ops" column="ops" javaType="java.lang.String"></result>
+        <result property="oimg" column="oimg" javaType="java.lang.String"></result>
+        <result property="orealimg" column="orealimg" javaType="java.lang.String"></result>
+        <result property="oacr" column="oacr" javaType="java.lang.String"></result>
+        <result property="orealacr" column="orealacr" javaType="java.lang.String"></result>
+    </resultMap>
+
+    <!--查询所有订单信息-->
+    <select id="findAll" parameterType="com.zlk.plan.entity.Pagination" resultMap="ordersMap">
+        select oid,o_cname,o_pname,onum,oprice,ounit,ostate,ocreatetime,ofinishtime,ops,oimg,oacr
+        from orders limit #{startPage},#{limit}
+    </select>
+
+    <!--通过id查询-->
+    <select id="findOrdersById" parameterType="java.lang.Integer" resultMap="ordersMap">
+        select oid,o_cname,o_pname,onum,oprice,ounit,ostate,ocreatetime,ofinishtime,ops,oimg,oacr
+        from orders where oid = #{oid}
+    </select>
+
+    <!--总条数-->
+    <select id="findCount" parameterType="com.zlk.plan.entity.Pagination" resultType="java.lang.Integer">
+        select count(1) from orders
+    </select>
+
+    <!--通过id删除-->
+    <delete id="deleteOrdersById" parameterType="java.lang.Integer">
+        delete from orders where oid = #{oid}
+    </delete>
+
+    <!--添加订单-->
+    <insert id="insertOrdersById" parameterType="com.zlk.plan.entity.Orders">
+        insert into orders(o_cname,o_pname,onum,oprice,ounit,ostate,ocreatetime,ofinishtime,ops,oimg,
+        orealimg,oacr,orealacr)
+        values (#{oCname},#{oPname},#{onum},#{oprice},#{ounit},#{ostate},#{ocreatetime},
+                #{ofinishtime},#{ops},#{oimg},#{orealimg},#{oacr},#{orealacr})
+    </insert>
+
+    <!--通过id修改-->
+    <update id="updateOrdersById" parameterType="com.zlk.plan.entity.Orders">
+        update orders set o_cname=#{oCname},o_pname=#{oPname},onum=#{onum},oprice=#{oprice},
+                ounit=#{ounit},ostate=#{ostate},ocreatetime=#{ocreatetime},ofinishtime=#{ofinishtime},
+                ops=#{ops},oimg=#{oimg},oacr=#{oacr}
+        where oid = #{oid}
+    </update>
+
+</mapper>

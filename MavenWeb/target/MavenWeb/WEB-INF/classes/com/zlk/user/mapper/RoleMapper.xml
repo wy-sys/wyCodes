@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zlk.user.mapper.RoleMapper">
+    <resultMap id="userFunctionMap" type="com.zlk.user.entity.UserFunction">
+        <id property="funId" column="fun_id" javaType="java.lang.Integer"></id>
+        <result property="funName" column="fun_name" javaType="java.lang.String"></result>
+        <result property="url" column="url" javaType="java.lang.String"></result>
+        <result property="status" column="status" javaType="java.lang.String"></result>
+        <result property="createUser" column="create_user" javaType="java.lang.String"></result>
+        <result property="createTime" column="create_time" javaType="java.util.Date"></result>
+        <result property="pid" column="pid" javaType="java.lang.Integer"></result>
+    </resultMap>
+
+    <select id="findFunByName" parameterType="java.lang.String" resultMap="userFunctionMap">
+        SELECT fun_name from user u,user_function uf,user_role ur,role r,role_function rf
+        WHERE u.uname = #{uname}
+        AND u.uid = ur.user_id
+        AND ur.role_id = r.rid
+        and rf.role_id = r.rid
+        and rf.function_id = uf.fun_id
+    </select>
+
+
+
+</mapper>

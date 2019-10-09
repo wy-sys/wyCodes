@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zlk.user.mapper.UserMapper">
+    <resultMap id="userMap" type="com.zlk.user.entity.User">
+        <id property="uid" column="uid" javaType="java.lang.Integer"></id>
+        <result property="uname" column="uname" javaType="java.lang.String"></result>
+        <result property="pwd" column="pwd" javaType="java.lang.String"></result>
+        <result property="phone" column="phone" javaType="java.lang.String"></result>
+        <result property="card" column="card" javaType="java.lang.String"></result>
+        <result property="provice" column="provice" javaType="java.lang.String"></result>
+        <result property="city" column="city" javaType="java.lang.String"></result>
+        <result property="area" column="area" javaType="java.lang.String"></result>
+        <result property="address" column="address" javaType="java.lang.String"></result>
+        <result property="status" column="status" javaType="java.lang.String"></result>
+        <result property="createTime" column="create_time" javaType="java.util.Date"></result>
+        <result property="createUser" column="create_user" javaType="java.lang.String"></result>
+        <result property="updateTime" column="update_time" javaType="java.util.Date"></result>
+        <result property="updateUser" column="update_user" javaType="java.lang.String"></result>
+    </resultMap>
+
+    <!--校验用户-->
+    <select id="findNameAndPwd" parameterType="com.zlk.user.entity.User" resultMap="userMap">
+        select uname,pwd from user where uname = #{uname} and pwd = #{pwd}
+    </select>
+
+    <!--根据用户名查询用户-->
+    <select id="fingUserByName" parameterType="com.zlk.user.entity.User" resultMap="userMap">
+        select * from user where uname = #{uname}
+    </select>
+
+
+</mapper>
